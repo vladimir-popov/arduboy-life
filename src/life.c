@@ -5,8 +5,14 @@
 #define BIT(bit) (1 << (bit))
 #define is_outside(buf, x, y) (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 
+uint8_t *
+create_buffer ()
+{
+  return (uint8_t *)calloc (sizeof (uint8_t), BUFF_SIZE);
+}
+
 uint8_t
-get_ceil (buffer ceils, uint8_t x, uint8_t y)
+get_ceil (uint8_t * ceils, uint8_t x, uint8_t y)
 {
   if (is_outside (ceils, x, y))
     return 0;
@@ -17,7 +23,7 @@ get_ceil (buffer ceils, uint8_t x, uint8_t y)
 }
 
 void
-set_ceil (buffer ceils, uint8_t x, uint8_t y, uint8_t ceil)
+set_ceil (uint8_t * ceils, uint8_t x, uint8_t y, uint8_t ceil)
 {
   if (is_outside (ceils, x, y))
     return;
@@ -31,7 +37,7 @@ set_ceil (buffer ceils, uint8_t x, uint8_t y, uint8_t ceil)
 }
 
 uint8_t
-get_neighbors (buffer ceils, uint8_t x, uint8_t y)
+get_neighbors (uint8_t * ceils, uint8_t x, uint8_t y)
 {
   uint8_t sum = 0;
   for (uint8_t i = x - 1; i <= x + 1; i++)
@@ -45,7 +51,7 @@ get_neighbors (buffer ceils, uint8_t x, uint8_t y)
 }
 
 void
-calculate_new_generation (buffer dest, buffer source)
+calculate_new_generation (uint8_t * dest, uint8_t * source)
 {
   for (uint8_t x = 0; x < WIDTH; x++)
     for (uint8_t y = 0; y < HEIGHT; y++)
@@ -74,7 +80,7 @@ calculate_new_generation (buffer dest, buffer source)
 }
 
 void
-clean (buffer buf)
+clean (uint8_t * buf)
 {
   for (int i = 0; i < BUFF_SIZE; i++)
     buf[i] = 0;
@@ -87,7 +93,7 @@ clean (buffer buf)
  *  0111
  */
 void
-glider (buffer ceils)
+glider (uint8_t * ceils)
 {
   ceils[0] = 0b0;
   ceils[1] = 0b1000;
@@ -96,9 +102,9 @@ glider (buffer ceils)
 }
 
 void
-swap_buffers (buffer **a, buffer **b)
+swap_buffers (uint8_t **a, uint8_t **b)
 {
-  buffer *t = *a;
+  uint8_t *t = *a;
   *a = *b;
   *b = t;
 }

@@ -161,7 +161,7 @@ endif
 #  				  unused functions at link time.
 # -fdata-sections		  Enables the generation of one ELF section for each variable in the 
 #  				  source file.
-CFLAGS= -Os -MMD -flto 		\
+CFLAGS= -g -Os -MMD -flto 		\
 	-ffunction-sections 	\
 	-fdata-sections 	\
 	$(MCU) 			\

@@ -4,11 +4,8 @@
 
 Arduboy2Core arduboy;
 
-buffer buffer1;
-buffer buffer2;
-
-buffer *bbuf = &buffer1;
-buffer *fbuf = &buffer2;
+uint8_t * bbuf;
+uint8_t * fbuf;
 
 static int
 availableMemory ()
@@ -22,7 +19,7 @@ availableMemory ()
 }
 
 void
-draw_buffer (buffer ceils)
+draw_buffer (uint8_t * ceils)
 {
   for (int i = 0; i < BUFF_SIZE; i++)
     arduboy.SPItransfer (ceils[i]);
@@ -36,10 +33,14 @@ setup ()
   while (!Serial)
     ; // wait for serial port to connect. Needed for native USB port only 
 
-  clean(buffer1);
-  clean(buffer2);
+  bbuf = create_buffer();
+  fbuf = create_buffer();
 
-  glider (*fbuf);
+  write_log(bbuf);                // 633
+  write_log(fbuf);                // 0
+  write_log (availableMemory ()); // 1013
+
+  glider (fbuf);
 
   arduboy.boot ();
 }
@@ -50,8 +51,8 @@ loop ()
   if (millis() % 500 != 0)
     return;
 
-  draw_buffer (*fbuf);
-  calculate_new_generation (*bbuf, *fbuf);
+  draw_buffer (fbuf);
+  calculate_new_generation (bbuf, fbuf);
   swap_buffers(&bbuf, &fbuf);
 }
 

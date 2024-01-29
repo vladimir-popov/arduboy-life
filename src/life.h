@@ -18,21 +18,21 @@ extern "C"
 {
 #endif
 
-  typedef uint8_t buffer[BUFF_SIZE];
+  uint8_t * create_buffer();
 
-  uint8_t get_ceil (buffer ceils, uint8_t x, uint8_t y);
+  uint8_t get_ceil (uint8_t * ceils, uint8_t x, uint8_t y);
 
-  void set_ceil (buffer ceils, uint8_t x, uint8_t y, uint8_t ceil);
+  void set_ceil (uint8_t * ceils, uint8_t x, uint8_t y, uint8_t ceil);
 
-  uint8_t get_neighbors (buffer ceils, uint8_t x, uint8_t y);
+  uint8_t get_neighbors (uint8_t * ceils, uint8_t x, uint8_t y);
 
-  void calculate_new_generation (buffer dest, buffer source);
+  void calculate_new_generation (uint8_t * dest, uint8_t * source);
 
-  void clean (buffer buf);
+  void clean (uint8_t * buf);
 
-  void glider (buffer ceils);
+  void glider (uint8_t * ceils);
 
-  void swap_buffers (buffer **a, buffer **b);
+  void swap_buffers (uint8_t **a, uint8_t **b);
 
   void write_log (int msg);
 
