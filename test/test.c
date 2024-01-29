@@ -71,10 +71,6 @@ tearDown (void)
 static void
 test_glider (void)
 {
-  uint8_t t[3];
-  void * pt = &t;
-  printf("ptr to arr %d\n", t);
-  printf("ptr to ptr to arr %d\n", pt);
   glider (buffer1);
   char *msg = render (buffer1, 8, 8);
   TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE (gliders[2], buffer1, 8, msg);

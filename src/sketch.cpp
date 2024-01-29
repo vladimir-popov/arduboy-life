@@ -36,13 +36,6 @@ setup ()
   while (!Serial)
     ; // wait for serial port to connect. Needed for native USB port only 
 
-  uint8_t t[3];
-  write_log(t);
-  write_log(&t);
-
-  // write_log (fbuf);
-  // write_log (availableMemory ());
-
   clean(buffer1);
   clean(buffer2);
 
@@ -54,16 +47,12 @@ setup ()
 void
 loop ()
 {
-  if (millis() % 1000 != 0)
+  if (millis() % 500 != 0)
     return;
 
-  // draw_buffer (*fbuf);
-  // calculate_new_generation (*bbuf, *fbuf);
-  // write_log(buffer1);
-  // write_log(&buffer1);
-
-  // write_log(&bbuf);
-  // swap_buffers(&bbuf, &fbuf);
+  draw_buffer (*fbuf);
+  calculate_new_generation (*bbuf, *fbuf);
+  swap_buffers(&bbuf, &fbuf);
 }
 
 void
