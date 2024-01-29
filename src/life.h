@@ -34,8 +34,6 @@ extern "C"
 
   void swap_buffers (buffer **a, buffer **b);
 
-  void write_log (int msg);
-
 #ifdef __cplusplus
 }
 #endif
